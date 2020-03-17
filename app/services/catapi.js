@@ -1,24 +1,27 @@
 class CatAPIService {
     getBreeds() {
-        return fetchJSON("https://api.thecatapi.com/v1/breeds")
-       /* return new Promise((resolve, reject) =>
+        //return fetchJSON("https://api.thecatapi.com/v1/breeds")
+        return new Promise((resolve, reject) =>
             fetch("https://api.thecatapi.com/v1/breeds")
                 .then(res => resolve(res.json()))
-                .catch(reject))*/
+                .catch(reject))
     }
     getBreed(breedId) {
         return new Promise((resolve, reject) =>
             fetchJSON(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
-            .then(breeds => {
-                if (breeds.length > 0) {
-                    resolve(breeds[0])
-                } else {
-                    reject(null)
-                }
-            })
+            .then(breeds => fonctionasync1(breeds))
             .catch(err => reject(err)))
     }
+}
 
+function fonctionasync1(breeds) {
+    return new Promise((resolve, reject) => {
+        if (breeds.length > 0) {
+            resolve(breeds[0])
+        } else {
+            reject(null)
+        }
+    })
 }
 
 /*
